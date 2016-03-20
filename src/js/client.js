@@ -20,11 +20,13 @@ class ExtensionClient {
 
                     if(data.freebies_discontinued == null) {
                         message = '<div>' +
-                            data.percent_sold_out + '%' + ' of packs sold out' +
-                            '</div>' +
-                            '<div>' +
-                            data.free_packs_claimed_percent + '%' + ' of free packs claimed' +
+                            data.percent_sold_out + '% Total Packs Claimed' +
                             '</div>';
+                        if(data.free_packs_claimed_percent < 70){
+                            message += '<div>' +
+                                data.free_packs_claimed_percent + '% Free Packs Claimed' +
+                                '</div>';
+                        }
                     }else{
                         var free_soldout = new Date(data.freebies_discontinued);
                         var months = [ "January", "February", "March", "April", "May", "June",
