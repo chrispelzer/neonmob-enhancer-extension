@@ -2,6 +2,8 @@
 
 Enhancing NeonMob with a Chrome Extension
 
+This Chrome extension will show the % of Free Packs claimed and the % of packs available when you are viewing any given set's checklist page.
+
 ## History
 It was mentioned that there was a NeonMob API available with information that wasn't shown about sets. I figured why
 not try out a Chrome extension. Currently it is in HEAVILY development meaning, it might disappear if NeonMob doesn't like it.
