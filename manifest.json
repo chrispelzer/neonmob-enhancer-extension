@@ -1,6 +1,6 @@
 {
-  "name": "Neonmob Enhancer",
-  "description": "Enhancing Neonmob",
+  "name": "NeonMob Enhancer",
+  "description": "Enhancing NeonMob",
   "version": "0.0.3",
   "icons": {
     "16": "assets/icon_16x16.png",
@@ -21,7 +21,7 @@
     "persistent": false
   },
   "page_action": {
-    "default_title": "Neonmob Enhancer",
+    "default_title": "NeonMob Enhancer",
     "default_icon": {
       "19": "assets/icon_19x19.png",
       "38": "assets/icon_38x38.png"
