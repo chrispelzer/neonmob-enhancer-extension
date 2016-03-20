@@ -1,3 +1,9 @@
+## 0.0.6 (March 20, 2016)
+
+Fixes:
+
+    - Fix for one more case for the status message area and fix for doubling output via @tgashby
+
 ## 0.0.5 (March 20, 2016)
 
 Fixes:
