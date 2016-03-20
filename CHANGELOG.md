@@ -1,3 +1,9 @@
+## 0.0.5 (March 20, 2016)
+
+Fixes:
+
+    - Display the free packs if you still had packs to open
+
 ## 0.0.4 (March 19, 2016)
 
 Features:
