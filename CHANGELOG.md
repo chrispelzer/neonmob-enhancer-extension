@@ -1,3 +1,9 @@
+## 0.0.4 (March 19, 2016)
+
+Features:
+
+    - Display the day when the free packs sold out on
+
 ## 0.0.3 (March 19, 2016)
 
 Fixes:
