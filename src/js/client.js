@@ -16,8 +16,7 @@ class ExtensionClient {
         if(setId > 0) {
             $.get('https://www.neonmob.com/api/setts/' + setId + '/', {format: 'json'})
                 .done(function (data) {
-
-                    if(data.freebies_discontinued == 'null') {
+                    if(data.freebies_discontinued == null) {
                         $('#status--free-packs').append(
                             '<div>' +
                             data.percent_sold_out + '%' + ' of packs sold out'
