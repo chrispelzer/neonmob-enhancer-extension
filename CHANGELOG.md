@@ -1,3 +1,9 @@
+## 0.0.3 (March 19, 2016)
+
+Fixes:
+
+    - Fix breaking of extension from a fix to check null but not the string null
+
 ## 0.0.2 (March 19, 2016)
 
 Fixes:
