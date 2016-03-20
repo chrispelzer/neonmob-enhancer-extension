@@ -39,9 +39,10 @@ class ExtensionClient {
 
                     if($('#status--released')) {
                         $('#status--released').append(message);
-                    }
-                    if($('#status--free-packs')){
+                    } else if($('#status--free-packs')){
                         $('#status--free-packs').append(message);
+                    } else if($('#status--paid')) {
+                        $('#status--paid').append(message);
                     }
                 });
         }
