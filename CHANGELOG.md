@@ -1,3 +1,9 @@
+## 0.0.7 (March 20, 2016)
+
+Fixes:
+
+    - Fix for if a free pack % is higher than 70, let NeonMob show it
+    
 ## 0.0.6 (March 20, 2016)
 
 Fixes:
