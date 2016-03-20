@@ -13,6 +13,10 @@ There are probably already plans in place to show this information, but maybe th
 
 Sent a pull request or fork off and create your own extension.
 
+## TODO
+
+* Optimize everything, this was a concept
+
 ## License
 
 Copyright (c) 2016 Chris Pelzer.
