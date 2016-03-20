@@ -22,7 +22,7 @@ class ExtensionClient {
                         message = '<div>' +
                             data.percent_sold_out + '% Total Packs Claimed' +
                             '</div>';
-                        if(!$('#status--released')){
+                        if(data.free_packs_claimed_percent < 70){
                             message += '<div>' +
                                 data.free_packs_claimed_percent + '% Free Packs Claimed' +
                                 '</div>';
