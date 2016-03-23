@@ -22,7 +22,7 @@ class ExtensionClient {
                         message = '<div>' +
                             data.percent_sold_out + '% Total Packs Claimed' +
                             '</div>';
-                        if(data.free_packs_claimed_percent < 70){
+                        if(data.free_packs_claimed_percent < 50){
                             message += '<div>' +
                                 data.free_packs_claimed_percent + '% Free Packs Claimed' +
                                 '</div>';
@@ -34,7 +34,7 @@ class ExtensionClient {
                         message = '<div>' +
                             'The free packs sold out on <br>' +
                             months[free_soldout.getMonth()] + ' ' +
-                            free_soldout.getDay() + ', ' +
+                            free_soldout.getDate() + ', ' +
                             free_soldout.getFullYear() +
                             '</div>';
                     }
