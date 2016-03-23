@@ -1,3 +1,10 @@
+## 0.0.8 (March 22, 2016)
+
+Fixes:
+
+    - Fix displaying to be the day of the month and not the day of the week for when the set sold out
+    - Fix threshold percentage of when to stop displaying the free pack % and let NeonMob handle it
+
 ## 0.0.7 (March 20, 2016)
 
 Fixes:
