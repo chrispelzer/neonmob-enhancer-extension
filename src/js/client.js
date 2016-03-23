@@ -34,7 +34,7 @@ class ExtensionClient {
                         message = '<div>' +
                             'The free packs sold out on <br>' +
                             months[free_soldout.getMonth()] + ' ' +
-                            free_soldout.getDay() + ', ' +
+                            free_soldout.getDate() + ', ' +
                             free_soldout.getFullYear() +
                             '</div>';
                     }
