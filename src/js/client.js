@@ -11,8 +11,7 @@
 
 class ExtensionClient {
     constructor() {
-        var setId = $('span.loadTarget').data('set-id');
-
+        var setId = $('[data-set-id]').data('set-id');
         if(setId > 0) {
             $.get('https://www.neonmob.com/api/setts/' + setId + '/', {format: 'json'})
                 .done(function (data) {
