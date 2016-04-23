@@ -1,6 +1,6 @@
 {
   "name": "NeonMob Enhancer",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Enhancing NeonMob",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
