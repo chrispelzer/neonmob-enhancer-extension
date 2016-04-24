@@ -38,7 +38,8 @@
       "js": [
         "common.js",
         "client.js"
-      ]
+      ],
+      "run_at": "document_end"
     }
   ],
   "manifest_version": 2,
