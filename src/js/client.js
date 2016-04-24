@@ -28,10 +28,15 @@ class ExtensionClient {
                             '</div>';
 
                         // Don't show if Neonmob is already showing it
-                        if (!$('#status--free-packs')) {
-                            message += '<div>' +
-                                data.free_packs_claimed_percent + '% Free Packs Claimed' +
-                                '</div>';
+                        if ($('#status--free-packs').length === 0) {
+                            var freeHtml = $('#status--free-packs').html();
+
+                            // Make sure the free-packs can actually be claimed
+                            if(freeHtml.search('Free Packs Claimed Today') !== -1) {
+                                message += '<div>' +
+                                    data.free_packs_claimed_percent + '% Free Packs Claimed' +
+                                    '</div>';
+                            }
                         }
                     } else {
                         // If the free packs were sold out then display the date they sold out on
