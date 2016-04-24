@@ -51,42 +51,39 @@ class ExtensionClient {
                             '</div>';
                     }
 
-                    // Find the rarity area
-                    var core_stats = data.core_stats;
-                    var special_stats = data.special_stats;
+                    // Grab the stats for the core and special rarities
+                    var stats = data.core_stats;
+                    stats.push.apply(stats, data.special_stats);
+
                     // Loop through each rarity
-                    core_stats.forEach(function (rarity) {
+                    stats.forEach(function (rarity) {
+                        // initialize for if we are not on a variant or chase
+                        var stat_padding = 'padding-left: 25px';
+                        var container_type = 'div';
+                        var individual_count = 'Per Print Count: ' + rarity.total_prints / rarity.total;
+
                         // Find the stat span
-                        var stat = $('.text-rarity-' + rarity.class_name);
+                        var stat = $('.rarity-stats--rarity-list .text-rarity-' + rarity.class_name);
                         var stat_html = stat.html();
 
                         // Update the odd position
                         stat.parent().find('small').css('top', 3);
 
-                        // Add total print data
-                        stat_html += '<div style="padding-left: 25px">' +
-                            'Total Print:' + rarity.total_prints +
-                            '</div>';
-                        stat.html(stat_html);
-                    });
-
-                    // Loop through each rarity
-                    special_stats.forEach(function (rarity) {
-                        // Find the stat span
-                        var stat = $('.text-rarity-' + rarity.class_name);
-                        var stat_html = stat.html();
-
-                        // Update the odd position
-                        stat.parent().find('small').css('top', 3);
                         if(rarity.name == 'chase'){
-                            var stat_padding = 'padding-left: 75px';
+                            stat_padding = 'padding-left: 75px';
+                            container_type = 'span';
+                            individual_count = 'Total Print Count: ' + rarity.total_prints;
                         }else if(rarity.name == 'variant'){
-                            var stat_padding = 'padding-left: 83px';
+                            stat_padding = 'padding-left: 83px';
+                            container_type = 'span';
+                            individual_count = 'Total Print Count: ' + rarity.total_prints;
                         }
-                        // Add total print data
-                        stat_html += '<span style="' + stat_padding + '">' +
-                            '<br>Total Print:' + rarity.total_prints +
-                            '</span>';
+
+                        // Build the stat html for the print counts
+                        stat_html += '<' + container_type + ' style="' + stat_padding + '">' +
+                            (container_type == 'span' ? '<br>' : '') +
+                            individual_count +
+                            '</' + container_type + '>';
                         stat.html(stat_html);
                     });
 
