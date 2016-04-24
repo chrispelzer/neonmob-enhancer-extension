@@ -45,7 +45,7 @@ class ExtensionClient {
                             free_soldout.getFullYear() +
                             '</div>';
                     }
-                    console.log('test');
+
                     // Find the rarity area
                     var core_stats = data.core_stats;
                     var special_stats = data.special_stats;
@@ -95,9 +95,7 @@ class ExtensionClient {
                     }
                 })
                 .error(function (jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
+                    
                 });
         }
     }
