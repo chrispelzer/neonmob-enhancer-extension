@@ -98,12 +98,38 @@ class ExtensionClient {
                     } else if ($('#status--paid')) {
                         $('#status--paid').append(message);
                     }
-                })
-                .error(function (jqXHR, textStatus, errorThrown) {
-                    
+                });
+
+            // Get the set pieces
+            $.get('https://www.neonmob.com/api/sets/' + setId + '/pieces/')
+                .done(function (data){
+                    var pieces = data.payload.results;
+                    pieces.forEach(function(piece){
+                        var pieceObj = null;
+                        if($('.variant #set-checklist--piece-' + piece.id).length !== 0) {
+                            pieceObj = $('.variant #set-checklist--piece-' + piece.id + ' span');
+                        }else if($('.chase #set-checklist--piece-' + piece.id).length !== 0){
+                            pieceObj = $('.chase #set-checklist--piece-' + piece.id + ' span');
+                        }
+
+                        if(pieceObj !== null) {
+                            var piece_html = $(pieceObj).html();
+                            var message = piece_html + '<br>(Prints: ' + piece.num_prints_total + ')';
+                            $(pieceObj).html(message);
+                        }
+                    });
                 });
         }
     }
 }
 
-new ExtensionClient();
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+        var run = setInterval(function() {
+            if($('[data-set-id]').data('set-id') !== undefined) {
+                clearInterval(run);
+                new ExtensionClient();
+            }
+        }, 500);
+    }
+}
