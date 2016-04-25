@@ -1,7 +1,7 @@
 {
   "name": "NeonMob Enhancer",
   "description": "Enhancing NeonMob",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "icons": {
     "16": "assets/icon_16x16.png",
     "32": "assets/icon_32x32.png",
@@ -10,7 +10,6 @@
   },
   "permissions": [
     "activeTab",
-    "tabs",
     "*://*.neonmob.com/"
   ],
   "background": {
@@ -39,7 +38,8 @@
       "js": [
         "common.js",
         "client.js"
-      ]
+      ],
+      "run_at": "document_idle"
     }
   ],
   "manifest_version": 2,
