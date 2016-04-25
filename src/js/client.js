@@ -65,7 +65,9 @@ class ExtensionClient {
                         stat.parent().find('small').css('top', 3);
 
                         if(rarity.name == 'chase'){
-                            if(rarity.total >= 10) {
+                            if(rarity.total >= 100){
+                                stat_padding = 'padding-left: 95px';
+                            }else if(rarity.total >= 10) {
                                 stat_padding = 'padding-left: 85px';
                             }else{
                                 stat_padding = 'padding-left: 75px';
@@ -73,7 +75,9 @@ class ExtensionClient {
                             container_type = 'span';
                             individual_count = 'Total Print Count: ' + rarity.total_prints;
                         }else if(rarity.name == 'variant'){
-                            if(rarity.total >= 10) {
+                            if(rarity.total >= 100) {
+                                stat_padding = 'padding-left: 103px';
+                            }else if(rarity.total >= 10) {
                                 stat_padding = 'padding-left: 93px';
                             }else{
                                 stat_padding = 'padding-left: 83px';
