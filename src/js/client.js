@@ -101,25 +101,33 @@ class ExtensionClient {
                 });
 
             // Get the set pieces
-            $.get('https://www.neonmob.com/api/sets/' + setId + '/pieces/')
-                .done(function (data){
-                    var pieces = data.payload.results;
-                    pieces.forEach(function(piece){
-                        var pieceObj = null;
-                        if($('.variant #set-checklist--piece-' + piece.id).length !== 0) {
-                            pieceObj = $('.variant #set-checklist--piece-' + piece.id + ' span');
-                        }else if($('.chase #set-checklist--piece-' + piece.id).length !== 0){
-                            pieceObj = $('.chase #set-checklist--piece-' + piece.id + ' span');
-                        }
-
-                        if(pieceObj !== null) {
-                            var piece_html = $(pieceObj).html();
-                            var message = piece_html + '<br>(Prints: ' + piece.num_prints_total + ')';
-                            $(pieceObj).html(message);
-                        }
-                    });
-                });
+            ExtensionClient.getPieces(setId, 0, 100)
         }
+    }
+
+    static getPieces(setId, offset, limit){
+        var pieces = $.get('https://www.neonmob.com/api/sets/' + setId + '/pieces/', {offset: offset, limit: limit})
+            .done(function (data){
+                var pieces = data.payload.results;
+                pieces.forEach(function(piece){
+                    var pieceObj = null;
+                    if($('.variant #set-checklist--piece-' + piece.id).length !== 0) {
+                        pieceObj = $('.variant #set-checklist--piece-' + piece.id + ' span');
+                    }else if($('.chase #set-checklist--piece-' + piece.id).length !== 0){
+                        pieceObj = $('.chase #set-checklist--piece-' + piece.id + ' span');
+                    }
+
+                    if(pieceObj !== null) {
+                        var piece_html = $(pieceObj).html();
+                        var message = piece_html + '<br>(Prints: ' + piece.num_prints_total + ')';
+                        $(pieceObj).html(message);
+                    }
+                });
+
+                if(data.payload.metadata.resultset.link.next !== null){
+                    ExtensionClient.getPieces(setId, offset + limit, limit);
+                }
+            });
     }
 }
 
