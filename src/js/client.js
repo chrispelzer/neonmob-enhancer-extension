@@ -123,4 +123,13 @@ class ExtensionClient {
     }
 }
 
-new ExtensionClient();
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+        var run = setInterval(function() {
+            if($('[data-set-id]').data('set-id') !== undefined) {
+                clearInterval(run);
+                new ExtensionClient();
+            }
+        }, 500);
+    }
+}
