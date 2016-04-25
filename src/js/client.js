@@ -98,16 +98,12 @@ class ExtensionClient {
                     } else if ($('#status--paid')) {
                         $('#status--paid').append(message);
                     }
-                })
-                .error(function (jqXHR, textStatus, errorThrown) {
-                    
                 });
 
             // Get the set pieces
             $.get('https://www.neonmob.com/api/sets/' + setId + '/pieces/')
                 .done(function (data){
                     var pieces = data.payload.results;
-
                     pieces.forEach(function(piece){
                         var pieceObj = null;
                         if($('.variant #set-checklist--piece-' + piece.id).length !== 0) {
