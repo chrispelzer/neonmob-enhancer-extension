@@ -153,7 +153,7 @@ class ExtensionClient {
                         var piece_html = $(pieceObj).html();
                         var message = piece_html;
                         if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
-                            message += '<br>(Prints: ' + piece.num_prints_total + ')';
+                            message += '<br>Prints: ' + piece.num_prints_total;
                         }
                         $(pieceObj).html(message);
                     }
