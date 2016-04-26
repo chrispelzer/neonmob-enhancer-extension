@@ -150,12 +150,17 @@ class ExtensionClient {
                     }
 
                     if(pieceObj !== null) {
-                        var piece_html = $(pieceObj).html();
-                        var message = piece_html;
-                        if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
-                            message += '<br>(Prints: ' + piece.num_prints_total + ')';
-                        }
-                        $(pieceObj).html(message);
+                        // Get the owner count of the piece
+                        $.get('https://www.neonmob.com/api/pieces/' + piece.id + '/owners/', {format: 'json'})
+                            .done(function(data){
+                                var piece_html = $(pieceObj).html();
+                                var message = piece_html;
+                                if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
+                                    message += '<br>Total Prints: ' + piece.num_prints_total;
+                                }
+                                message += '<br>Owners: ' + data.count + '/' + piece.num_prints_total;
+                                $(pieceObj).html(message);
+                            });
                     }
                 });
 
