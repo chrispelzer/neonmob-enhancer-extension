@@ -127,19 +127,29 @@ class ExtensionClient {
     static getPieces(setId, offset, limit){
         $.get('https://www.neonmob.com/api/sets/' + setId + '/pieces/', {offset: offset, limit: limit})
             .done(function (data){
+                // Get the Rarity types to match against
+                var refs = data.refs
+                var rarity_list = {};
+                $.each(refs, (function(key, value){
+                    if(key.indexOf('default:piece-rarity-') !== -1){
+                        rarity_list[key] = value;
+                    }
+                }));
+
                 var pieces = data.payload.results;
                 pieces.forEach(function(piece){
                     var pieceObj = null;
 
-                    if($('.variant #set-checklist--piece-' + piece.id).length !== 0) {
-                        pieceObj = $('.variant #set-checklist--piece-' + piece.id + ' span');
-                    }else if($('.chase #set-checklist--piece-' + piece.id).length !== 0){
-                        pieceObj = $('.chase #set-checklist--piece-' + piece.id + ' span');
+                    if($('.' + rarity_list[piece.rarity[1]]['class'] + ' #set-checklist--piece-' + piece.id).length !== 0) {
+                        pieceObj = $('.' + rarity_list[piece.rarity[1]]['class'] + ' #set-checklist--piece-' + piece.id + ' span');
                     }
 
                     if(pieceObj !== null) {
                         var piece_html = $(pieceObj).html();
-                        var message = piece_html + '<br>(Prints: ' + piece.num_prints_total + ')';
+                        var message = piece_html;
+                        if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
+                            message += '<br>(Prints: ' + piece.num_prints_total + ')';
+                        }
                         $(pieceObj).html(message);
                     }
                 });
