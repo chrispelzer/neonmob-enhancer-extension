@@ -82,8 +82,13 @@ class ExtensionClient {
                     // initialize for if we are not on a variant or chase
                     var stat_padding = 'padding-left: 25px';
                     var container_type = 'div';
-                    var individual_count = 'Per Print Count: ' + rarity.total_prints / rarity.total +
-                        '<br>Total Print Count: ' + rarity.total_prints;
+                    var individual_count = '';
+
+                    // Only show Per Print count if there's more than one print of that rarity
+                    if((rarity.total_prints / rarity.total) != rarity.total_prints){
+                        individual_count = 'Per Print Count: ' + rarity.total_prints / rarity.total + '<br>';
+                    }
+                    individual_count += 'Total Print Count: ' + rarity.total_prints;
 
                     // Find the stat span
                     var stat = $('.rarity-stats--rarity-list .text-rarity-' + rarity.class_name);
