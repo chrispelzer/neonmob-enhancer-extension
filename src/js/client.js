@@ -105,20 +105,22 @@ class ExtensionClient {
                         }else{
                             stat_padding = 'padding-left: 75px';
                         }
-                        container_type = 'span';
-                        individual_count = 'Total Print Count: ' + rarity.total_prints;
                     }else if(rarity.name == 'variant'){
                         if(rarity.total >= 100) {
                             stat_padding = 'padding-left: 103px';
                         }else if(rarity.total >= 10) {
-                            stat_padding = 'padding-left: 93px';
+                            stat_padding = 'padding-left: 87px';
                         }else{
                             stat_padding = 'padding-left: 83px';
                         }
-                        container_type = 'span';
-                        individual_count = 'Total Print Count: ' + rarity.total_prints;
                     }
 
+                    // override for chase and variants to be total print count only
+                    if(rarity.name == 'variant' || rarity.name == 'chase'){
+                      container_type = 'span';
+                      individual_count = 'Total Print Count: ' + rarity.total_prints;
+                    }
+                    
                     // Build the stat html for the print counts
                     stat_html += '<' + container_type + ' style="' + stat_padding + '">' +
                         (container_type == 'span' ? '<br>' : '') +
