@@ -93,6 +93,12 @@ class ExtensionClient {
                 // Grab the stats for the core and special rarities
                 var stats = data.core_stats;
                 stats.push.apply(stats, data.special_stats);
+                var total = 0;
+
+                // Get the total print count of all rarities
+                stats.forEach(function(rarity){
+                   total += rarity.total_prints;
+                });
 
                 // Loop through each rarity
                 stats.forEach(function (rarity) {
@@ -101,6 +107,11 @@ class ExtensionClient {
 
                     // Find the stat span to append to
                     var stat = $('.rarity-stats--rarity-list .text-rarity-' + rarity.class_name);
+
+                    // Add the percentage
+                    var percent = Math.floor((rarity.total_prints/total) * 100);
+                    var percentageHTML = $(stat).html() + ' (~' + (percent == 0 ? '1' : percent) + '%)';
+                    $(stat).html(percentageHTML);
 
                     // Update the odds 1 in # position
                     stat.parent().find('small').css('top', 3);
