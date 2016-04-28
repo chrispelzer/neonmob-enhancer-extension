@@ -31,41 +31,55 @@ class ExtensionClient {
         // Get the Set data from the API based on the setId found
         $.get('https://www.neonmob.com/api/setts/' + setId + '/', {format: 'json'})
             .done(function (data) {
-                var message = '';
+                var message = null;
+                var soldOutDays = 0;
+                var container = document.createElement('span');
+                var months = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"];
 
                 // Have the free packs been discontinued yet?
                 if (data.freebies_discontinued == null) {
-                    message = '<div>' +
-                        data.percent_sold_out + '% Total Packs Claimed' +
-                        '</div>';
+                    message = data.percent_sold_out + '% Total Packs Claimed';
 
                     // Don't show if Neonmob is already showing it
                     if ($('#status--free-packs').length === 0 || $('#status--free-packs').html().search('Free Packs Claimed Today') !== -1) {
-                        message += '<div>' +
-                            data.free_packs_claimed_percent + '% Free Packs Claimed' +
-                            '</div>';
+                        message += '<br>' + data.free_packs_claimed_percent + '% Free Packs Claimed'
                     }
-                } else {
-                    // If the free packs were sold out then display the date they sold out on
+                }
+
+                // If only the free packs were sold out then display the date they sold out on
+                if(data.free_packs_available === false && data.packs_available === true) {
                     var free_soldout = new Date(data.freebies_discontinued);
-                    var months = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-                    message = '<div>' +
-                        'The free packs sold out on <br>' +
+                    soldOutDays = ExtensionClient.diffDays(new Date(data.released), free_soldout);
+
+                    message = 'The free packs sold out within<br>'+
+                        soldOutDays + ' days on ' +
                         months[free_soldout.getMonth()] + ' ' +
                         free_soldout.getDate() + ', ' +
-                        free_soldout.getFullYear() +
-                        '</div>';
+                        free_soldout.getFullYear();
+                }
+
+                // If both the free packs and paid packs were sold out, display the amount of days it sold out in
+                if(data.free_packs_available === false && data.packs_available === false) {
+                    soldOutDays = ExtensionClient.diffDays(new Date(data.released), new Date(data.discontinued));
+                    message = 'The set sold out within<br>' + soldOutDays + ' days of it\'s release';
                 }
 
                 // Find the correct status id selector to append the message too
-                if ($('#status--released')) {
-                    $('#status--released').append(message);
-                } else if ($('#status--free-packs')) {
-                    $('#status--free-packs').append(message);
-                } else if ($('#status--paid')) {
-                    $('#status--paid').append(message);
+                var freeObj = null;
+                if ($('.sett-status-message #status--released').length !== 0
+                    && $('.sett-status-message #status--paid').length !== 0) {
+                    freeObj = $('#status--paid');
+                } else if ($('.sett-status-message #status--released').length !== 0
+                    && $('.sett-status-message #status--free-packs').length !== 0) {
+                    freeObj = $('#status--free-packs');
+                } else if ($('.sett-status-message #status--released').length !== 0) {
+                    freeObj = $('#status--released');
                 }
+
+                $(container).addClass('text-prominent');
+                container.innerHTML = message;
+                $(container).insertAfter(freeObj);
             });
     }
 
@@ -165,6 +179,16 @@ class ExtensionClient {
                     ExtensionClient.getPieces(setId, offset + limit, limit);
                 }
             });
+    }
+
+    static diffDays (date1,date2){
+        var ndays;
+        var ts1 = date1.getTime();
+        var ts2 = date2.getTime();
+
+        ndays = (ts2 - ts1) / 1000 / 86400;
+        ndays = Math.round(ndays - 0.5);
+        return ndays;
     }
 }
 
