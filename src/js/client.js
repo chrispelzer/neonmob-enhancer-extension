@@ -140,20 +140,18 @@ class ExtensionClient {
                 }));
 
                 var pieces = data.payload.results;
+                var pieceObj = null;
                 pieces.forEach(function(piece){
-                    var pieceObj = null;
-
-                    if($('.' + rarity_list[piece.rarity[1]]['class'] + ' #set-checklist--piece-' + piece.id).length !== 0) {
-                        pieceObj = $('.' + rarity_list[piece.rarity[1]]['class'] + ' #set-checklist--piece-' + piece.id + ' span');
-                    }
-
-                    if(pieceObj !== null) {
-                        var piece_html = $(pieceObj).html();
-                        var message = piece_html;
-                        if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
-                            message += '<br>Prints: ' + piece.num_prints_total;
+                    if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
+                        pieceObj = $('.' + rarity_list[piece.rarity[1]]['class'] + ' #set-checklist--piece-' + piece.id);
+                        if (pieceObj !== null) {
+                            var message = 'Prints: ' + piece.num_prints_total;
+                            var container = document.createElement('span');
+                            $(container).css('display', 'block');
+                            container.innerHTML = message;
+                            $(container).insertAfter(pieceObj.find('span'));
                         }
-                        $(pieceObj).html(message);
+                        pieceObj = null;
                     }
                 });
 
