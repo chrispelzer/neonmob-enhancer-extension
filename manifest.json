@@ -1,7 +1,7 @@
 {
   "name": "NeonMob Enhancer",
   "description": "Enhancing NeonMob",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "icons": {
     "16": "assets/icon_16x16.png",
     "32": "assets/icon_32x32.png",
