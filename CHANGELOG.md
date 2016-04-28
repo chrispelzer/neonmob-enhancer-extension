@@ -1,3 +1,49 @@
+## 0.0.15 (April 28, 2016)
+
+Features:
+
+    - Changed displaying the print count for the Core Rarity Per/Total Prints. If they're the same, show just the Total
+    - Chases/Variant Individual Print counts aren't surrounded by ()
+    - Display the amount of days either the free packs sold out or the set went out of print since the released date
+        
+Fixes:
+
+    - Alot of Optimizations
+
+## 0.0.14 (April 25, 2016)
+
+Fixes:
+
+    - Fix issue if a set has more than 50 variant/chases that only the first 50 would show the print count.
+
+## 0.0.13 (April 24, 2016)
+
+Features:
+
+    - Individual Print Counts are listed within the listing of the prints underneath the print name for Chases and Variants
+
+Fixes:
+
+    - Fix the ready state so loading of the counts and % should now work 98% of the time
+
+## 0.0.12 (April 24, 2016)
+
+Features:
+
+    - Added Per Print Count listed within the Pack Odds area for each of the Core Set Rarities
+    - Added Total Print Count of all Chase/Variant listed within the Pack Odds area (Due to the variety of print counts for each chase or variant print, it's impossible to list out ALL print counts)
+
+Fixes:
+
+    - Might have fixed the bug that would require a page refresh to display correctly
+    - Permission update to not include ALL tabs but only the Active Tab for NeonMob (This should only show the permission now for only neonmob.com related sites, not all browsing history, Sorry if that caused confusion)
+
+## 0.0.11 (April 23, 2016)
+
+Fixes:
+
+    - Issue with extension manifest version and the actual package version. This puts it back in line
+
 ## 0.0.8 (March 22, 2016)
 
 Fixes:
