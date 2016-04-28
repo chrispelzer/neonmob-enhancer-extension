@@ -4,8 +4,8 @@ Features:
 
     - Changed displaying the print count for the Core Rarity Per/Total Prints. If they're the same, show just the Total
     - Chases/Variant Individual Print counts aren't surrounded by ()
-    - Added the displaying of the number of days depending on if the free packs are just sold out or if the set is out of print
-    
+    - Display the amount of days either the free packs sold out or the set went out of print since the released date
+        
 Fixes:
 
     - Alot of Optimizations
