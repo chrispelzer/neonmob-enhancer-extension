@@ -150,7 +150,9 @@ class ExtensionClient {
                         if (pieceObj !== null) {
                             var message = 'Prints: ' + piece.num_prints_total;
                             var container = document.createElement('span');
-                            $(container).css('display', 'block');
+                            $(container).css({
+                                'display' : 'block'
+                            });
                             container.innerHTML = message;
                             $(container).insertAfter(pieceObj.find('span'));
                         }
