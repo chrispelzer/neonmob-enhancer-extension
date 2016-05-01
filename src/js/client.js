@@ -53,7 +53,8 @@ class ExtensionClient {
                     soldOutDays = ExtensionClient.diffDays(new Date(data.released), free_soldout);
 
                     message = 'The free packs sold out within<br>'+
-                        soldOutDays + ' days on ' +
+                        soldOutDays + ' day' +
+                        (soldOutdays >= 2 ? ' s' : '') + ' on ' +
                         months[free_soldout.getMonth()] + ' ' +
                         free_soldout.getDate() + ', ' +
                         free_soldout.getFullYear();
@@ -62,7 +63,9 @@ class ExtensionClient {
                 // If both the free packs and paid packs were sold out, display the amount of days it sold out in
                 if(data.free_packs_available === false && data.packs_available === false) {
                     soldOutDays = ExtensionClient.diffDays(new Date(data.released), new Date(data.discontinued));
-                    message = 'The set sold out within<br>' + soldOutDays + ' days of it\'s release';
+                    message = 'The set sold out within<br>' + soldOutDays + ' day' +
+                        (soldOutdays >= 2 ? 's' : '') +
+                        ' since its release';
                 }
 
                 // Find the correct status id selector to append the message too
