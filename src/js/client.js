@@ -111,6 +111,11 @@ class ExtensionClient {
                     // Update the odds 1 in # position
                     stat.parent().find('small').css('top', 3);
 
+                    // Add the percentage
+                    var percent = Math.floor((rarity.total_prints/total) * 100);
+                    var percentageHTML = $(stat).html() + ' (~' + (percent == 0 ? '1' : percent) + '%)';
+                    $(stat).html(percentageHTML);
+
                     // Handle if the set is unlimited or not
                     if(data.edition_size == 'unlimited'){
                         individual_count = 'Print Count: &infin;';
