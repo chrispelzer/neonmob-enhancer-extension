@@ -111,17 +111,22 @@ class ExtensionClient {
                     // Update the odds 1 in # position
                     stat.parent().find('small').css('top', 3);
 
-                    // Show Per Print count if there's more than one print of that rarity
-                    if((rarity.total_prints / rarity.total) != rarity.total_prints){
-                        individual_count = 'Per Print Count: ' + rarity.total_prints / rarity.total + '<br>';
-                    }
+                    // Handle if the set is unlimited or not
+                    if(data.edition_size == 'unlimited'){
+                        individual_count = 'Print Count: &infin;';
+                    }else {
+                        // Show Per Print count if there's more than one print of that rarity
+                        if ((rarity.total_prints / rarity.total) != rarity.total_prints) {
+                            individual_count = 'Per Print Count: ' + rarity.total_prints / rarity.total + '<br>';
+                        }
 
-                    // Set the Total Print Count
-                    if(rarity.name == 'variant' || rarity.name == 'chase'){
-                        // override for chase and variants to be total print count only
-                        individual_count = 'Total Print Count: ' + rarity.total_prints;
-                    }else{
-                        individual_count += 'Total Print Count: ' + rarity.total_prints;
+                        // Set the Total Print Count
+                        if (rarity.name == 'variant' || rarity.name == 'chase') {
+                            // override for chase and variants to be total print count only
+                            individual_count = 'Total Print Count: ' + rarity.total_prints;
+                        } else {
+                            individual_count += 'Total Print Count: ' + rarity.total_prints;
+                        }
                     }
 
                     // Build the stat html for the print counts
