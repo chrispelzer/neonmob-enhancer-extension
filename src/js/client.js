@@ -108,11 +108,6 @@ class ExtensionClient {
                     // Find the stat span to append to
                     var stat = $('.rarity-stats--rarity-list .text-rarity-' + rarity.class_name);
 
-                    // Add the percentage
-                    var percent = Math.floor((rarity.total_prints/total) * 100);
-                    var percentageHTML = $(stat).html() + ' (~' + (percent == 0 ? '1' : percent) + '%)';
-                    $(stat).html(percentageHTML);
-
                     // Update the odds 1 in # position
                     stat.parent().find('small').css('top', 3);
 
