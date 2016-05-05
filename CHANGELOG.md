@@ -2,7 +2,7 @@
 
 Features:
 
-    - If a set is unlimited with a infinite # of prints available, display ∞
+    - If a set is unlimited with an infinite # of prints available, display ∞
 
 ## 0.0.15 (April 28, 2016)
 
