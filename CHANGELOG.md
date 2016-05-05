@@ -1,3 +1,9 @@
+## 0.1.0 (May 3, 2016)
+
+Features:
+
+    - If a set is unlimited with an infinite # of prints available, display ∞
+
 ## 0.0.15 (April 28, 2016)
 
 Features:
@@ -8,7 +14,7 @@ Features:
         
 Fixes:
 
-    - Alot of Optimizations
+    - A lot of Optimizations
 
 ## 0.0.14 (April 25, 2016)
 

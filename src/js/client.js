@@ -53,7 +53,8 @@ class ExtensionClient {
                     soldOutDays = ExtensionClient.diffDays(new Date(data.released), free_soldout);
 
                     message = 'The free packs sold out within<br>'+
-                        soldOutDays + ' days on ' +
+                        soldOutDays + ' day' +
+                        (soldOutdays >= 2 ? ' s' : '') + ' on ' +
                         months[free_soldout.getMonth()] + ' ' +
                         free_soldout.getDate() + ', ' +
                         free_soldout.getFullYear();
@@ -62,7 +63,9 @@ class ExtensionClient {
                 // If both the free packs and paid packs were sold out, display the amount of days it sold out in
                 if(data.free_packs_available === false && data.packs_available === false) {
                     soldOutDays = ExtensionClient.diffDays(new Date(data.released), new Date(data.discontinued));
-                    message = 'The set sold out within<br>' + soldOutDays + ' days of it\'s release';
+                    message = 'The set sold out within<br>' + soldOutDays + ' day' +
+                        (soldOutdays >= 2 ? 's' : '') +
+                        ' since its release';
                 }
 
                 // Find the correct status id selector to append the message too
@@ -90,6 +93,12 @@ class ExtensionClient {
                 // Grab the stats for the core and special rarities
                 var stats = data.core_stats;
                 stats.push.apply(stats, data.special_stats);
+                var total = 0;
+
+                // Get the total print count of all rarities
+                stats.forEach(function(rarity){
+                   total += rarity.total_prints;
+                });
 
                 // Loop through each rarity
                 stats.forEach(function (rarity) {
@@ -102,17 +111,22 @@ class ExtensionClient {
                     // Update the odds 1 in # position
                     stat.parent().find('small').css('top', 3);
 
-                    // Show Per Print count if there's more than one print of that rarity
-                    if((rarity.total_prints / rarity.total) != rarity.total_prints){
-                        individual_count = 'Per Print Count: ' + rarity.total_prints / rarity.total + '<br>';
-                    }
+                    // Handle if the set is unlimited or not
+                    if(data.edition_size == 'unlimited'){
+                        individual_count = 'Print Count: &infin;';
+                    }else {
+                        // Show Per Print count if there's more than one print of that rarity
+                        if ((rarity.total_prints / rarity.total) != rarity.total_prints) {
+                            individual_count = 'Per Print Count: ' + rarity.total_prints / rarity.total + '<br>';
+                        }
 
-                    // Set the Total Print Count
-                    if(rarity.name == 'variant' || rarity.name == 'chase'){
-                        // override for chase and variants to be total print count only
-                        individual_count = 'Total Print Count: ' + rarity.total_prints;
-                    }else{
-                        individual_count += 'Total Print Count: ' + rarity.total_prints;
+                        // Set the Total Print Count
+                        if (rarity.name == 'variant' || rarity.name == 'chase') {
+                            // override for chase and variants to be total print count only
+                            individual_count = 'Total Print Count: ' + rarity.total_prints;
+                        } else {
+                            individual_count += 'Total Print Count: ' + rarity.total_prints;
+                        }
                     }
 
                     // Build the stat html for the print counts
@@ -145,9 +159,12 @@ class ExtensionClient {
                     if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
                         pieceObj = $('.' + rarity_list[piece.rarity[1]]['class'] + ' #set-checklist--piece-' + piece.id);
                         if (pieceObj !== null) {
-                            var message = 'Prints: ' + piece.num_prints_total;
+                            var message = 'Prints: ' +
+                                (piece.num_prints_total == 'unlimited' ? '&infin;' : piece.num_prints_total);
                             var container = document.createElement('span');
-                            $(container).css('display', 'block');
+                            $(container).css({
+                                'display' : 'block'
+                            });
                             container.innerHTML = message;
                             $(container).insertAfter(pieceObj.find('span'));
                         }
