@@ -159,7 +159,8 @@ class ExtensionClient {
                     if(rarity_list[piece.rarity[1]]['class'] == 'variant' || rarity_list[piece.rarity[1]]['class'] == 'chase') {
                         pieceObj = $('.' + rarity_list[piece.rarity[1]]['class'] + ' #set-checklist--piece-' + piece.id);
                         if (pieceObj !== null) {
-                            var message = 'Prints: ' + piece.num_prints_total;
+                            var message = 'Prints: ' +
+                                (piece.num_prints_total == 'unlimited' ? '&infin;' : piece.num_prints_total);
                             var container = document.createElement('span');
                             $(container).css({
                                 'display' : 'block'
