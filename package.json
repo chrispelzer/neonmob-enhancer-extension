@@ -1,5 +1,6 @@
 {
-  "name": "NeonMob Enhancer",
+  "name": "NeonMobEnhancer",
+  "private": true,
   "version": "0.1.0",
   "description": "Enhancing NeonMob",
   "scripts": {
