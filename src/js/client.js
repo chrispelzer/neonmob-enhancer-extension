@@ -133,7 +133,7 @@ class ExtensionClient {
                     var container = document.createElement('div');
                     $(container).addClass('text-rarity-' + rarity.class_name);
                     $(container).css({
-                        'padding-left': '25px'
+                        'padding-left': '25px',
                     });
                     container.innerHTML = individual_count;
                     $(container).insertAfter(stat);
@@ -197,5 +197,13 @@ document.onreadystatechange = function () {
                 new ExtensionClient();
             }
         }, 500);
+
+        /*
+         * Temporary fix for transparent Chase webkit-linear-gradient background on the text.
+         * TODO: Clean up when fixed
+         */
+        var style = document.createElement('style');
+        document.head.appendChild(style);
+        style.sheet.insertRule(".text-rarity-chase{background:-webkit-linear-gradient(0deg,#E82C8E,#f7cf25)}");
     }
 }
