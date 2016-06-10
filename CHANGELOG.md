@@ -1,3 +1,9 @@
+## 0.1.1 (June 10, 2016)
+
+Fixes:
+
+    - Added a temporary fix to add the background gradient color for the Chase rarity. Will remove once corrected
+
 ## 0.1.0 (May 3, 2016)
 
 Features:
