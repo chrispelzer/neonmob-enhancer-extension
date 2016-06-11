@@ -204,6 +204,6 @@ document.onreadystatechange = function () {
          */
         var style = document.createElement('style');
         document.head.appendChild(style);
-        style.sheet.insertRule(".text-rarity-chase{background:-webkit-linear-gradient(0deg,#E82C8E,#f7cf25)}");
+        style.sheet.insertRule(".text-rarity-chase{background:-webkit-linear-gradient(0deg,#E82C8E,#f7cf25)}", 0);
     }
 }
