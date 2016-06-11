@@ -1,3 +1,10 @@
+## 0.1.2 (June 11, 2016)
+
+Fixes:
+
+    - Fix bug where the sold out dates weren't being shown and tweak the text shown
+    - Fix deprecated warning for style insertRule index required
+
 ## 0.1.1 (June 10, 2016)
 
 Fixes:
