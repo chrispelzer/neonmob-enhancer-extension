@@ -7,6 +7,7 @@ module.exports = {
     entry: {
         background: './background.js',
         client: './client.js',
+        settings: './settings.js',
         common: [
             'lodash',
             'jquery'

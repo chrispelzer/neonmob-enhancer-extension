@@ -19,12 +19,13 @@
     ],
     "persistent": false
   },
-  "page_action": {
-    "default_title": "NeonMob Enhancer",
+  "browser_action": {
+    "default_title": "NeonMob Enhancer Settings",
     "default_icon": {
       "19": "assets/icon_19x19.png",
       "38": "assets/icon_38x38.png"
-    }
+    },
+    "default_popup": "views/settings.html"
   },
   "content_scripts": [
     {

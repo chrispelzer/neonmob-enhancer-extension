@@ -77,7 +77,7 @@ gulp.task('build', ['pre-build'], function (callback) {
 });
 
 gulp.task('static', function () {
-    gulp.src(['manifest.json', 'src/**/*.png'])
+    gulp.src(['manifest.json', 'src/**/*.png', 'src/**/*.html'])
         .pipe(gulp.dest('./build'));
 });
 
