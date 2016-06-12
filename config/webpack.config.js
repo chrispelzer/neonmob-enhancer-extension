@@ -8,12 +8,12 @@ module.exports = {
         background: './background.js',
         client: './client.js',
         settings: './settings.js',
+        bootstrap: 'bootstrap/dist/js/bootstrap.js',
         common: [
             'lodash',
             'jquery'
         ],
     },
-
     output: {
         path: path.resolve(__dirname, '../build'),
         pathinfo: true,
@@ -24,8 +24,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /\/node_modules/,
-                loader: 'babel'
+                exclude: [/\/node_modules\/jquery/,/\/node_modules\/lodash\//],
+                loader: 'babel-loader'
             },
             {
                 test: /\.png$/,
@@ -33,19 +33,18 @@ module.exports = {
             }
         ],
     },
-
     resolve: {
         modulesDirectories: [
             '../node_modules',
         ]
     },
-
     plugins: [
         new webpack.ProvidePlugin({
             _: 'lodash',
             $: 'jquery',
-            jQuery: 'jquery'
+            jQuery: 'jquery',
+            'window.Tether': 'tether'
         }),
-        new webpack.optimize.CommonsChunkPlugin('common', 'common.js')
+        new webpack.optimize.CommonsChunkPlugin('common', 'common.js', Infinity)
     ]
 };
