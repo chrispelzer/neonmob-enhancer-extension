@@ -8,11 +8,9 @@ module.exports = {
         background: './background.js',
         client: './client.js',
         settings: './settings.js',
-        bootstrap: 'bootstrap/dist/js/bootstrap.js',
         common: [
             'lodash',
             'jquery',
-            'tether/dist/js/tether.js',
         ],
     },
     output: {
@@ -26,7 +24,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: [/\/node_modules\/jquery/,/\/node_modules\/lodash\//],
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                query:
+                {
+                    presets:['es2015']
+                }
             },
             {
                 test: /\.png$/,
@@ -44,7 +46,6 @@ module.exports = {
             _: 'lodash',
             $: 'jquery',
             jQuery: 'jquery',
-            'window.Tether': 'tether'
         }),
         new webpack.optimize.CommonsChunkPlugin('common', 'common.js', Infinity)
     ]
