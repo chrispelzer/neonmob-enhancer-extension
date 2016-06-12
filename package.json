@@ -1,7 +1,7 @@
 {
   "name": "NeonMobEnhancer",
   "private": true,
-  "version": "0.1.2",
+  "version": "0.2.0-dev",
   "description": "Enhancing NeonMob",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,7 +25,6 @@
     "babel-core": "^5.2.11",
     "babel-eslint": "^3.0.1",
     "babel-loader": "^5.0.0",
-    "crx": "^3.0.2",
     "css-loader": "^0.12.0",
     "file-loader": "^0.8.1",
     "gulp": "^3.8.11",

@@ -6,8 +6,6 @@ var eslint = require('gulp-eslint');
 var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
 var replace = require('gulp-replace');
-var exec = require('child_process').exec;
-var mkdirp = require('mkdirp');
 var bump = require('gulp-bump');
 
 var getManifest = function () {
@@ -22,7 +20,7 @@ var getManifest = function () {
  * Used for the build task.
  */
 gulp.task('clean', function () {
-    return gulp.src(['./build', './dist']).pipe(clean());
+    return gulp.src(['./build']).pipe(clean());
 });
 
 /**
@@ -66,18 +64,6 @@ gulp.task('build', ['pre-build'], function (callback) {
 
         var manifest = getManifest();
         var name = manifest.name + '.' + manifest.version;
-        mkdirp('./dist', function (err) {
-            if (err) {
-                throw new gutil.PluginError('build', err);
-            }
-
-            var command = './node_modules/.bin/crx pack ./build -p ./config/extension.pem -o ./dist/';
-            command += name + '.crx';
-
-            exec(command, function (err, stdout, stderr) {
-                callback();
-            });
-        });
     });
 });
 
@@ -104,16 +90,9 @@ gulp.task('build-dev', [], function (callback) {
 
 });
 
-gulp.task('reload', function () {
-    gulp.src('src/assets/reload.html')
-        .pipe(replace('__TIMESTAMP__', new Date().getTime().toString()))
-        .pipe(gulp.dest('./build'));
-});
-
 gulp.task('watch-static', [], function (callback) {
     runSequence(
         'static',
-        'reload',
         callback
     );
 });
@@ -121,12 +100,11 @@ gulp.task('watch-static', [], function (callback) {
 gulp.task('watch-webpack', [], function (callback) {
     runSequence(
         'build-dev',
-        'reload',
         callback
     );
 });
 
-gulp.task('dev', ['static', 'build-dev', 'reload'], function () {
+gulp.task('dev', ['static', 'build-dev'], function () {
     gulp.watch(['src/*.json'], ['watch-static']);
     gulp.watch(['src/css/*.css'], ['watch-static']);
     gulp.watch(['src/assets/*.png'], ['watch-static']);

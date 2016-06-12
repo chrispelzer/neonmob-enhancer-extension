@@ -32,10 +32,6 @@ module.exports = {
                 loader: 'style!css'
             },
             {
-                test: /\.tpl$/,
-                loader: 'raw'
-            },
-            {
                 test: /\.html$/,
                 loader: 'raw'
             },
@@ -44,11 +40,9 @@ module.exports = {
                 loader: 'url?limit=10000&name=assets/[name].[ext]'
             }
         ],
-        // noParse: /\/node_modules/
     },
 
     resolve: {
-        extensions: ['', '.js', '.json'],
         modulesDirectories: [
             '../node_modules',
         ]
