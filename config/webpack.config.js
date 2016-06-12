@@ -11,7 +11,6 @@ module.exports = {
             'lodash',
             'jquery'
         ],
-        scss: '../scss/main.scss',
     },
 
     output: {
@@ -20,17 +19,12 @@ module.exports = {
         filename: '[name].js',
         sourceMapFilename: '[name].map'
     },
-    devtool: "source-map",
     module: {
         loaders: [
             {
                 test: /\.js$/,
                 exclude: /\/node_modules/,
                 loader: 'babel'
-            },
-            {
-                test: /\.scss$/,
-                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
             },
             {
                 test: /\.html$/,

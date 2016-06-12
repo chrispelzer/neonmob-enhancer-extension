@@ -2,6 +2,15 @@ var gulp = require('gulp');
 var gutil = require('gutil');
 var webpack = require('webpack');
 var eslint = require('gulp-eslint');
+var plumber = require('gulp-plumber');
+
+var sass = require('gulp-sass');
+var postcss = require('gulp-postcss');
+var scss = require('postcss-scss');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
+var reporter = require('reporter');
+var sourcemaps = require('gulp-sourcemaps');
 
 var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
@@ -72,6 +81,30 @@ gulp.task('static', function () {
         .pipe(gulp.dest('./build'));
 });
 
+gulp.task('styles', function () {
+    var processors = [
+        autoprefixer({browsers: ['last 1 version']}),
+        cssnano()
+    ];
+
+    gulp.src("./src/scss/*.scss")
+        // Capture all errors
+        .pipe(plumber())
+
+        // Lint the scss
+        .pipe(postcss(processors,{ syntax: scss }))
+
+        // Compile the scss
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(sass({
+            includePaths: ['node_modules'],
+        }).on('error', sass.logError))
+
+        // Write the files to the public directory
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./build/css'));
+});
+
 gulp.task('build-dev', [], function (callback) {
     var config = require('./config/webpack.config.js');
     var compiler = webpack(config);
@@ -104,11 +137,13 @@ gulp.task('watch-webpack', [], function (callback) {
     );
 });
 
-gulp.task('dev', ['static', 'build-dev'], function () {
+gulp.task('dev-watch', ['static', 'styles', 'build-dev'], function () {
     gulp.watch(['src/*.json'], ['watch-static']);
     gulp.watch(['src/assets/*.png'], ['watch-static']);
 
-    gulp.watch(['src/js/*.js', 'src/views/*.html', 'src/scss/*.scss'], ['watch-webpack']);
+    gulp.watch(['src/js/*.js', 'src/views/*.html'], ['watch-webpack']);
 });
 
-gulp.task('default', ['dev'])
+gulp.task('dev-build', ['static', 'styles', 'build-dev']);
+
+gulp.task('default', ['dev-build'])

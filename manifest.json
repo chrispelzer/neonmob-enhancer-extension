@@ -32,6 +32,9 @@
         "http://*.neonmob.com/*",
         "https://*.neonmob.com/*"
       ],
+      "css": [
+        "css/client.css"
+      ],
       "js": [
         "common.js",
         "client.js"
