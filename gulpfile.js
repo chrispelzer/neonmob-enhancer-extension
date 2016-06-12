@@ -68,7 +68,7 @@ gulp.task('build', ['pre-build'], function (callback) {
 });
 
 gulp.task('static', function () {
-    gulp.src(['manifest.json', 'src/**/*.css', 'src/**/*.png'])
+    gulp.src(['manifest.json', 'src/**/*.png'])
         .pipe(gulp.dest('./build'));
 });
 
@@ -106,10 +106,9 @@ gulp.task('watch-webpack', [], function (callback) {
 
 gulp.task('dev', ['static', 'build-dev'], function () {
     gulp.watch(['src/*.json'], ['watch-static']);
-    gulp.watch(['src/css/*.css'], ['watch-static']);
     gulp.watch(['src/assets/*.png'], ['watch-static']);
 
-    gulp.watch(['src/js/*.js', 'src/views/*.html'], ['watch-webpack']);
+    gulp.watch(['src/js/*.js', 'src/views/*.html', 'src/scss/*.scss'], ['watch-webpack']);
 });
 
 gulp.task('default', ['dev'])

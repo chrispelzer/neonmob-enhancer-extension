@@ -10,7 +10,8 @@ module.exports = {
         common: [
             'lodash',
             'jquery'
-        ]
+        ],
+        scss: '../scss/main.scss',
     },
 
     output: {
@@ -19,7 +20,7 @@ module.exports = {
         filename: '[name].js',
         sourceMapFilename: '[name].map'
     },
-
+    devtool: "source-map",
     module: {
         loaders: [
             {
@@ -28,8 +29,8 @@ module.exports = {
                 loader: 'babel'
             },
             {
-                test: /\.css$/,
-                loader: 'style!css'
+                test: /\.scss$/,
+                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
             },
             {
                 test: /\.html$/,
