@@ -41,7 +41,6 @@
     "mutation-summary": "0.0.0",
     "node-sass": "^3.7.0",
     "postcss-scss": "^0.1.8",
-    "raw-loader": "^0.5.1",
     "reporter": "^0.1.0",
     "run-sequence": "^1.2.1",
     "url-loader": "^0.5.7",

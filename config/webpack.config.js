@@ -27,10 +27,6 @@ module.exports = {
                 loader: 'babel'
             },
             {
-                test: /\.html$/,
-                loader: 'raw'
-            },
-            {
                 test: /\.png$/,
                 loader: 'url?limit=10000&name=assets/[name].[ext]'
             }
