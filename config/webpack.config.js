@@ -11,7 +11,8 @@ module.exports = {
         bootstrap: 'bootstrap/dist/js/bootstrap.js',
         common: [
             'lodash',
-            'jquery'
+            'jquery',
+            'tether/dist/js/tether.js',
         ],
     },
     output: {
