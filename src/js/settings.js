@@ -12,34 +12,54 @@ import 'foundation-sites/js/foundation.util.mediaQuery';
 import 'foundation-sites/js/foundation.util.keyboard';
 import 'foundation-sites/js/foundation.util.motion';
 
-!function ($) {
-    'use strict';
+'use strict';
 
-    class ExtensionSettings {
-        constructor() {
-            // Default settings
-            var settings = {
-                'pack-info': true,
-                'count-info': true,
-                'special-info': true,
-            }
+class ExtensionSettings {
 
-            // Set the default settings to localStorage
-            _.forEach(settings, function (value, key) {
-                if (localStorage[key] == '') {
-                    localStorage[key] = value;
+    constructor() {
+        // Default settings states
+        var defaultSettings = {
+            'pack': false,
+            'count': false,
+            'special': false,
+        }
+
+        // Set the default settings to localStorage if it's unset
+        chrome.storage.local.get(Object.keys(defaultSettings), function(items){
+            _.forEach(defaultSettings, function(value, key){
+                var switchObj = document.getElementById(key);
+                var state = false;
+                var saveObj = {};
+
+                // Set the default setting otherwise use the setting from the storage
+                if(items[key] == ''){
+                    state = defaultSettings[key];
+                }else{
+                    state = items[key];
                 }
-            });
 
-            this.setEvents(settings);
-        }
+                // Set the switch property to the state it needs to be
+                $(switchObj).prop('checked', state);
 
-        setEvents(settings) {
-            $('#pack-info').on('change', function (e) {
-                console.log(e);
+                // Save the state to storage
+                saveObj[key] = state;
+                chrome.storage.local.set(saveObj);
+
+                // Set the onchange for the setting switch to save
+                $(switchObj).on('change', function () {
+                    var state = $(this).prop('checked');
+                    var key = $(this).prop('id');
+                    var obj = {};
+                    obj[key] = state;
+                    chrome.storage.local.set(obj);
+                });
             });
-        }
+        });
     }
+}
 
-    new ExtensionSettings();
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+        new ExtensionSettings();
+    }
 }
