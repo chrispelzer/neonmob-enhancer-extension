@@ -10,7 +10,8 @@
   },
   "permissions": [
     "activeTab",
-    "*://*.neonmob.com/"
+    "*://*.neonmob.com/",
+    "storage"
   ],
   "background": {
     "scripts": [

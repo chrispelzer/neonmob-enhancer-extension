@@ -11,19 +11,40 @@
 
 class ExtensionClient {
     constructor() {
+        // Default settings states
+        var defaultSettings = {
+            'pack': true,
+            'count': true,
+            'special': true,
+        }
+
         // Grab the set id integer from the data-set-id data attribute
         var setId = $('[data-set-id]').data('set-id');
 
         // Did we find a setId?
         if (setId > 0) {
-            // Set the Free Packs Stats
-            ExtensionClient.getPacks(setId);
+            chrome.storage.local.get(Object.keys(defaultSettings), function(items) {
+                _.forEach(defaultSettings, function(value, key){
+                     if(items[key] === null){
+                         items[key] = defaultSettings[key];
+                     }
+                });
 
-            // Set the Print count for the Variant/Chases
-            ExtensionClient.getPieces(setId, 0, 100);
+                // Set the Free Packs Stats
+                if(items['pack'] == true) {
+                    ExtensionClient.getPacks(setId);
+                }
 
-            // Set Card Stats
-            ExtensionClient.getStats(setId);
+                // Set Card Stats
+                if(items['count'] == true) {
+                    ExtensionClient.getStats(setId);
+                }
+
+                // Set the Print count for the Variant/Chases
+                if(items['special'] == true) {
+                    ExtensionClient.getPieces(setId, 0, 100);
+                }
+            });
         }
     }
 
