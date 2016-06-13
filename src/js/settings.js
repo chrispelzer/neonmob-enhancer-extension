@@ -32,9 +32,10 @@ class ExtensionSettings {
                 var saveObj = {};
 
                 // Set the default setting otherwise use the setting from the storage
-                if(items[key] == ''){
+                if(items[key] === null){
                     state = defaultSettings[key];
                 }else{
+                    console.log(key + ':' + items[key] + ' loaded from storage');
                     state = items[key];
                 }
 
@@ -43,7 +44,9 @@ class ExtensionSettings {
 
                 // Save the state to storage
                 saveObj[key] = state;
-                chrome.storage.local.set(saveObj);
+                chrome.storage.local.set(saveObj, function(items){
+                    console.log(key + ':' + state + ' saved');
+                });
 
                 // Set the onchange for the setting switch to save
                 $(switchObj).on('change', function () {
@@ -51,7 +54,9 @@ class ExtensionSettings {
                     var key = $(this).prop('id');
                     var obj = {};
                     obj[key] = state;
-                    chrome.storage.local.set(obj);
+                    chrome.storage.local.set(obj, function(items){
+                        console.log(key + ':' + state + ' saved');
+                    });
                 });
             });
         });
