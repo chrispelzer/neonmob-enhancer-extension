@@ -19,9 +19,9 @@ class ExtensionSettings {
     constructor() {
         // Default settings states
         var defaultSettings = {
-            'pack': false,
-            'count': false,
-            'special': false,
+            'pack': true,
+            'count': true,
+            'special': true,
         }
 
         // Set the default settings to localStorage if it's unset
