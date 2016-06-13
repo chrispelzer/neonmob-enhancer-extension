@@ -7,59 +7,46 @@ module.exports = {
     entry: {
         background: './background.js',
         client: './client.js',
+        settings: './settings.js',
         common: [
             'lodash',
-            'jquery'
-        ]
+            'jquery',
+        ],
     },
-
     output: {
         path: path.resolve(__dirname, '../build'),
         pathinfo: true,
         filename: '[name].js',
         sourceMapFilename: '[name].map'
     },
-
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /\/node_modules/,
-                loader: 'babel'
-            },
-            {
-                test: /\.css$/,
-                loader: 'style!css'
-            },
-            {
-                test: /\.tpl$/,
-                loader: 'raw'
-            },
-            {
-                test: /\.html$/,
-                loader: 'raw'
+                exclude: [/\/node_modules\/jquery/,/\/node_modules\/lodash\//],
+                loader: 'babel-loader',
+                query:
+                {
+                    presets:['es2015']
+                }
             },
             {
                 test: /\.png$/,
                 loader: 'url?limit=10000&name=assets/[name].[ext]'
             }
         ],
-        // noParse: /\/node_modules/
     },
-
     resolve: {
-        extensions: ['', '.js', '.json'],
         modulesDirectories: [
             '../node_modules',
         ]
     },
-
     plugins: [
         new webpack.ProvidePlugin({
             _: 'lodash',
             $: 'jquery',
-            jQuery: 'jquery'
+            jQuery: 'jquery',
         }),
-        new webpack.optimize.CommonsChunkPlugin('common', 'common.js')
+        new webpack.optimize.CommonsChunkPlugin('common', 'common.js', Infinity)
     ]
 };

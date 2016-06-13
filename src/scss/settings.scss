@@ -1,0 +1,20 @@
+@import "partials/foundation-settings";
+
+// Core foundation
+@import "foundation-sites/scss/foundation";
+
+// Call mixin to get all foundation CSS
+@include foundation-global-styles;
+@include foundation-flex-classes;
+@include foundation-flex-grid;
+@include foundation-button;
+@include foundation-switch;
+
+body {
+  height: 409px;
+  width: 335px;
+  padding: 0;
+  margin: 5px;
+  position: relative;
+  background-color: #ffffff;
+}

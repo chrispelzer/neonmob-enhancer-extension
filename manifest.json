@@ -1,7 +1,7 @@
 {
   "name": "NeonMob Enhancer",
   "description": "Enhancing NeonMob",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "icons": {
     "16": "assets/icon_16x16.png",
     "32": "assets/icon_32x32.png",
@@ -19,12 +19,13 @@
     ],
     "persistent": false
   },
-  "page_action": {
-    "default_title": "NeonMob Enhancer",
+  "browser_action": {
+    "default_title": "NeonMob Enhancer Settings",
     "default_icon": {
       "19": "assets/icon_19x19.png",
       "38": "assets/icon_38x38.png"
-    }
+    },
+    "default_popup": "views/settings.html"
   },
   "content_scripts": [
     {
@@ -33,7 +34,7 @@
         "https://*.neonmob.com/*"
       ],
       "css": [
-        "css/extension.css"
+        "css/client.css"
       ],
       "js": [
         "common.js",
