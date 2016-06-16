@@ -1,3 +1,9 @@
+## 0.1.3 (June 15, 2016)
+
+Fixes:
+
+    - Remove temporary fix for the background gradient for the Chase rarity.
+
 ## 0.1.2 (June 11, 2016)
 
 Fixes:
